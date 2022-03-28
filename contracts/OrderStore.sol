@@ -9,17 +9,30 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  */
 contract OrderStore is Ownable {
 
-  bytes32 public constant NVKD_ROLE = keccak256("NVKD_ROLE");
-  bytes32 public constant NVDP_ROLE = keccak256("NVDP_ROLE");
-  bytes32 public constant NVGH_ROLE = keccak256("NVGH_ROLE");
-  bytes32 public constant QL_ROLE = keccak256("QL_ROLE");
-  bytes32 public constant SHOP_ROLE = keccak256("SHOP_ROLE");
-  bytes32 public constant NCC_ROLE = keccak256("NCC_ROLE");
+  bytes32 public constant NVKD_ROLE = keccak256("NVKD_ROLE"); // Nhan vien kinh doanh
+  bytes32 public constant NVDP_ROLE = keccak256("NVDP_ROLE"); // Nhan vien dieu phoi
+  bytes32 public constant NVGH_ROLE = keccak256("NVGH_ROLE"); // Nhan vien giao hang
+  bytes32 public constant QL_ROLE = keccak256("QL_ROLE"); // Quan ly
+  bytes32 public constant SHOP_ROLE = keccak256("SHOP_ROLE"); // Shop
+  bytes32 public constant NCC_ROLE = keccak256("NCC_ROLE"); // Nha cung cap
 
   string name;
-
+  // accepted = Xác nhận
+  // call_ship = Giao ship lấy hàng
+  // taked = Ship đã lấy hàng
+  // warehouse = Giao kho
+  // delivering = Đang giao hàng
+  // delivery_success = Giao hàng thành công
+  // rejected = Trả lại hàng
+  // return_warehouse = Nhập lại kho
+  // return_shop = Trả shop thành công
+  // cancel = Hủy vận đơn
+  // checking = Đang đối soát
+  // checked = Đã đối soát
+  // wait_deposit = Chờ cọc
+  // deposited = Đã đặt cọc
   enum OrderStatus {
-    accepted,
+    accepted, 
     call_ship,
     taked,
     warehouse,
@@ -31,8 +44,8 @@ contract OrderStore is Ownable {
     cancel,
     checking,
     checked,
-    wait_deposit,
-    deposited
+    wait_deposit, 
+    deposited 
   }
 
   struct StatusHistory {
