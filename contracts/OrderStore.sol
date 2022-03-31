@@ -53,6 +53,11 @@ contract OrderStore is Ownable {
     uint256 atBlock;
   }
 
+  struct Consensus {
+    bool verified;
+    uint256 timestamp;
+  }
+
   /// A mapping of the order id to the hash that was issued
   mapping(string => bytes32) public orders;
 
@@ -65,11 +70,37 @@ contract OrderStore is Ownable {
   /// A mapping of role to status can accept
   mapping(bytes32 => OrderStatus[]) public rules;
 
-  event OrderUpload(string orderId, bytes32 orderHash, address sender );
-  event DocumentRevoked(bytes32 indexed document, address indexed sender);
+  /// A mapping of consensus hash to signed
+  mapping(bytes32 => mapping(address => bool)) public signatures;
 
-  constructor(string memory _name) public {
-    name = _name;
+  /// A mapping of consensus hash to signed
+  mapping(bytes32 => Consensus) public consensusTx;
+
+  address[] public signers;
+
+  event OrderUpload(string orderId, bytes32 orderHash, address sender );
+  event UpdateStatus(string orderId, OrderStatus status, address sender);
+  event Sign(bytes32 data, address signers);
+  event Verify(bytes32 data);
+
+  constructor() public {
+    roles[msg.sender] = NVKD_ROLE;
+    initRules();
+  }
+
+  function initRules() internal {
+    rules[NVKD_ROLE].push(OrderStatus.accepted);
+    rules[NVKD_ROLE].push(OrderStatus.cancel);
+    rules[NVKD_ROLE].push(OrderStatus.return_shop);
+    rules[NVKD_ROLE].push(OrderStatus.checked);
+    rules[NVKD_ROLE].push(OrderStatus.checking);
+    rules[NVDP_ROLE].push(OrderStatus.call_ship);
+    rules[NVGH_ROLE].push(OrderStatus.taked);
+    rules[NVGH_ROLE].push(OrderStatus.warehouse);
+    rules[NVGH_ROLE].push(OrderStatus.delivering);
+    rules[NVGH_ROLE].push(OrderStatus.rejected);
+    rules[NVGH_ROLE].push(OrderStatus.return_warehouse);
+    rules[NVGH_ROLE].push(OrderStatus.deposited);
   }
 
   function issue(string memory orderId, bytes32 orderHash) public onlyOwner {
@@ -99,10 +130,54 @@ contract OrderStore is Ownable {
           status: status,
           atBlock: block.number
     }));
+    emit UpdateStatus(orderId, status, msg.sender);
   }
 
   function getOrder(string memory orderId) public view returns (bytes32, StatusHistory[] memory) {
     return (orders[orderId], statusHistory[orderId]);
+  }
+
+  function submitTransaction(bytes32 data)
+        public
+        returns (uint transactionId)
+  {
+    require(roles[msg.sender] == NVKD_ROLE || roles[msg.sender] == SHOP_ROLE || roles[msg.sender] == NCC_ROLE, "Not permission");
+    addTransaction(data);
+    signatures[data][msg.sender] = true;
+    emit Sign(data, msg.sender);
+    confirmTransaction(data);
+  }
+
+  function addTransaction(bytes32 data)
+        public
+    {
+        if(consensusTx[data].timestamp != 0) {
+          return;
+        } else {
+          consensusTx[data] = Consensus({
+            verified: false,
+            timestamp: block.timestamp
+          });
+        }
+    }
+
+  function confirmTransaction(bytes32 data)
+        public
+    {
+        uint256 count = 0;
+        for(uint256 i = 0 ; i < signers.length; i++) {
+          if(signatures[data][signers[i]] == true) {
+            count++;
+          }
+        }
+        if(count == signers.length) {
+          consensusTx[data].verified = true;
+          emit Verify(data);
+        }
+    }
+  
+  function setSigner(address signer) onlyOwner public {
+    signers.push(signer);
   }
 
 }
