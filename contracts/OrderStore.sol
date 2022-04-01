@@ -85,6 +85,7 @@ contract OrderStore is Ownable {
 
   constructor() public {
     roles[msg.sender] = NVKD_ROLE;
+    signers.push(msg.sender);
     initRules();
   }
 
@@ -178,6 +179,10 @@ contract OrderStore is Ownable {
   
   function setSigner(address signer) onlyOwner public {
     signers.push(signer);
+  }
+
+  function setRole(address user, bytes32 role) public {
+    roles[user] = role;
   }
 
 }
