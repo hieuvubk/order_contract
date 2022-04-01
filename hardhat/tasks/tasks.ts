@@ -7,7 +7,7 @@ task('contract:verify', 'verify contract')
   .addOptionalParam('address', 'address')
   .addOptionalParam('symbol', 'symbol')
   .setAction(async (taskArgs, hre) => {
-    const address = taskArgs.address || '0x0273b17Eb666221489C75456f4b9eb564664031f';
+    const address = taskArgs.address || '0x428C95C3Eaa171FA966068143DD07140B3d255f8';
     await hre.run('verify:verify', {
       address,
       constructorArguments: [],
@@ -138,13 +138,13 @@ task('contract:updateStatus', 'Update order status')
     const instance = new web3.eth.Contract(Contract.abi, Contract.address);
 
     const data = {
-      id: "10",
-      name: "abc",
+      id: "18",
+      name: "Rượu Mẫu Sơn",
     }
     const hash = sha256(data.name);
     console.log(hash.toString());
 
-    const tx = await instance.methods.submitTransaction(`0x${hash}`).send({from: deployer});
+    const tx = await instance.methods.submitTransaction('18', `0x${hash}`).send({from: deployer});
 
     console.log(`tx hash: ${tx.transactionHash}`);
   });

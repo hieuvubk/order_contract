@@ -82,8 +82,8 @@ contract OrderStore is Ownable {
 
   event OrderUpload(string orderId, bytes32 orderHash, address sender );
   event UpdateStatus(string orderId, OrderStatus status, address sender);
-  event Sign(bytes32 data, address signers);
-  event Verify(bytes32 data);
+  event Sign(string id, bytes32 data, address signers);
+  event Verify(string id, bytes32 data);
 
   constructor() public {
     roles[msg.sender] = NVKD_ROLE;
@@ -147,7 +147,7 @@ contract OrderStore is Ownable {
     require(roles[msg.sender] == QL_ROLE || roles[msg.sender] == SHOP_ROLE || roles[msg.sender] == NCC_ROLE, "Not permission");
     addTransaction(id, data);
     signatures[data][msg.sender] = true;
-    emit Sign(data, msg.sender);
+    emit Sign(id, data, msg.sender);
     confirmTransaction(id,data);
   }
 
@@ -175,7 +175,7 @@ contract OrderStore is Ownable {
         }
         if(count == requires) {
           consensusTx[id][data].verified = true;
-          emit Verify(data);
+          emit Verify(id, data);
         }
     }
   
