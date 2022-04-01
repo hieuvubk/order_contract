@@ -7,7 +7,7 @@ task('contract:verify', 'verify contract')
   .addOptionalParam('address', 'address')
   .addOptionalParam('symbol', 'symbol')
   .setAction(async (taskArgs, hre) => {
-    const address = taskArgs.address || '0x7b2f2D90Fc30b5358c368Ce3d65a0c1BEb9ecBF4';
+    const address = taskArgs.address || '0x0273b17Eb666221489C75456f4b9eb564664031f';
     await hre.run('verify:verify', {
       address,
       constructorArguments: [],
@@ -47,8 +47,8 @@ task('contract:updateStatus', 'Update order status')
   const instance = new web3.eth.Contract(Contract.abi, Contract.address);
 
   const data = {
-      id: "1234",
-      name: "abc",
+      id: "DL1648827286185",
+      name: "afsdfasdbc",
   }
   const hash = sha256(data.name);
   console.log(hash.toString());
@@ -70,7 +70,7 @@ task('contract:updateStatus', 'Update order status')
     deposited 
   };
 
-  const tx = await instance.methods.updateOrderStatus(data.id, OrderStatus.cancel).send({ from: deployer});
+  const tx = await instance.methods.updateOrderStatus(data.id, OrderStatus.return_shop).send({ from: deployer});
 
   console.log(`tx hash: ${tx.transactionHash}`);
   });
@@ -107,7 +107,7 @@ task('contract:updateStatus', 'Update order status')
     const Contract = await deployments.get('OrderStore');
     const instance = new web3.eth.Contract(Contract.abi, Contract.address);
 
-    const tx = await instance.methods.setSigner('0xf29162ed5Ed4Da23656C5190aae71e61Bb074AeC').send({from: deployer});
+    const tx = await instance.methods.setSigner('0x656F29aAe1b4dc71e3070B324515c2208997B348').send({from: deployer});
 
     console.log(`tx hash: ${tx.transactionHash}`);
   });
@@ -122,7 +122,7 @@ task('contract:updateStatus', 'Update order status')
     const Contract = await deployments.get('OrderStore');
     const instance = new web3.eth.Contract(Contract.abi, Contract.address);
 
-    const tx = await instance.methods.setRole('0xf29162ed5Ed4Da23656C5190aae71e61Bb074AeC', '0x1f0426c2589e5c3ea5f5996e2a4371ca21edd86514b6679c9dd135d7c85b28bf').send({from: deployer});
+    const tx = await instance.methods.setRole('0x656F29aAe1b4dc71e3070B324515c2208997B348', '0x80d27d05994edf4994028aeca85fdaca3f2d00ef05d9d609a8b295c631139a65').send({from: deployer});
 
     console.log(`tx hash: ${tx.transactionHash}`);
   });

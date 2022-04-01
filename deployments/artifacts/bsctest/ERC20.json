@@ -1,0 +1,193 @@
+{
+  "address": "0x6f00B93134877c77feee1a0C12C2B3fa8a077DcE",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "burnToken",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x8f6937f6840bcf2cde66e2d9abf38f0951ef5f1d526e281566f3c603bdf9fedb",
+  "receipt": {
+    "to": null,
+    "from": "0xf29162ed5Ed4Da23656C5190aae71e61Bb074AeC",
+    "contractAddress": "0x6f00B93134877c77feee1a0C12C2B3fa8a077DcE",
+    "transactionIndex": 8,
+    "gasUsed": "216393",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x35f59d1212b0906586e5f8bc033c42811b4862b56c9834de9faa31de97c73b83",
+    "transactionHash": "0x8f6937f6840bcf2cde66e2d9abf38f0951ef5f1d526e281566f3c603bdf9fedb",
+    "logs": [],
+    "blockNumber": 14569483,
+    "cumulativeGasUsed": "4898414",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    1000000
+  ],
+  "solcInputHash": "241cfea4c100ccaf6c4cc98878e52a46",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokens\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"burnToken\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/ERC20.sol\":\"ERC20\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/ERC20.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\r\\npragma solidity >=0.7.0 <0.9.0;\\r\\n\\r\\ncontract ERC20 {\\r\\n    mapping(address => uint256) balances;\\r\\n    mapping(address => mapping(address => uint256)) allowed;\\r\\n\\r\\n    event Transfer(address indexed _from, address indexed _to, uint256 _value);\\r\\n    event Approval(address indexed _owner, address indexed _spender, uint256 _value);\\r\\n\\r\\n    constructor(uint256 tokens) {\\r\\n        balances[msg.sender] = tokens;\\r\\n    }\\r\\n\\r\\n    function burnToken(uint256 _amount) public returns (bool) {\\r\\n        require(balances[msg.sender] >= _amount);\\r\\n\\r\\n        balances[msg.sender] -= _amount;\\r\\n\\r\\n        return true;\\r\\n    }\\r\\n\\r\\n    function transfer(address _from, address _to, uint256 _amount) public returns (bool) {\\r\\n        require(balances[_from] >= _amount);\\r\\n\\r\\n        balances[_from] -= _amount;\\r\\n\\r\\n        balances[_to] += _amount;\\r\\n\\r\\n        emit Transfer(_from, _to, _amount);\\r\\n\\r\\n        return true;\\r\\n    }\\r\\n\\r\\n\\r\\n}\",\"keccak256\":\"0xe6fdc24e74f91367750e027655d35ec0f20853eafee691e4085ef70741f50d73\",\"license\":\"GPL-3.0\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516102fb3803806102fb83398101604081905261002f91610044565b3360009081526020819052604090205561005c565b600060208284031215610055578081fd5b5051919050565b6102908061006b6000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80637b47ec1a1461003b578063beabacc814610064575b600080fd5b61004e6100493660046101e9565b610077565b60405161005b9190610201565b60405180910390f35b61004e6100723660046101ae565b6100c1565b3360009081526020819052604081205482111561009357600080fd5b33600090815260208190526040812080548492906100b290849061022d565b9091555060019150505b919050565b6001600160a01b0383166000908152602081905260408120548211156100e657600080fd5b6001600160a01b0384166000908152602081905260408120805484929061010e90849061022d565b90915550506001600160a01b0383166000908152602081905260408120805484929061013b908490610215565b92505081905550826001600160a01b0316846001600160a01b03167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef84604051610185919061020c565b60405180910390a35060019392505050565b80356001600160a01b03811681146100bc57600080fd5b6000806000606084860312156101c2578283fd5b6101cb84610197565b92506101d960208501610197565b9150604084013590509250925092565b6000602082840312156101fa578081fd5b5035919050565b901515815260200190565b90815260200190565b6000821982111561022857610228610244565b500190565b60008282101561023f5761023f610244565b500390565b634e487b7160e01b600052601160045260246000fdfea2646970667358221220d40b330f7d8361a9cc54554ed0e0384c0f06562a19c3dc9075935d8209a2d0aa64736f6c63430008000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80637b47ec1a1461003b578063beabacc814610064575b600080fd5b61004e6100493660046101e9565b610077565b60405161005b9190610201565b60405180910390f35b61004e6100723660046101ae565b6100c1565b3360009081526020819052604081205482111561009357600080fd5b33600090815260208190526040812080548492906100b290849061022d565b9091555060019150505b919050565b6001600160a01b0383166000908152602081905260408120548211156100e657600080fd5b6001600160a01b0384166000908152602081905260408120805484929061010e90849061022d565b90915550506001600160a01b0383166000908152602081905260408120805484929061013b908490610215565b92505081905550826001600160a01b0316846001600160a01b03167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef84604051610185919061020c565b60405180910390a35060019392505050565b80356001600160a01b03811681146100bc57600080fd5b6000806000606084860312156101c2578283fd5b6101cb84610197565b92506101d960208501610197565b9150604084013590509250925092565b6000602082840312156101fa578081fd5b5035919050565b901515815260200190565b90815260200190565b6000821982111561022857610228610244565b500190565b60008282101561023f5761023f610244565b500390565b634e487b7160e01b600052601160045260246000fdfea2646970667358221220d40b330f7d8361a9cc54554ed0e0384c0f06562a19c3dc9075935d8209a2d0aa64736f6c63430008000033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 5,
+        "contract": "contracts/ERC20.sol:ERC20",
+        "label": "balances",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 11,
+        "contract": "contracts/ERC20.sol:ERC20",
+        "label": "allowed",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
