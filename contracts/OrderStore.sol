@@ -74,9 +74,11 @@ contract OrderStore is Ownable {
   mapping(bytes32 => mapping(address => bool)) public signatures;
 
   /// A mapping of consensus hash to signed
-  mapping(bytes32 => Consensus) public consensusTx;
+  mapping(string => mapping(bytes32 => Consensus)) public consensusTx;
 
   address[] public signers;
+
+  uint256 public constant requires = 2; // Nha cung cap
 
   event OrderUpload(string orderId, bytes32 orderHash, address sender );
   event UpdateStatus(string orderId, OrderStatus status, address sender);
@@ -137,31 +139,31 @@ contract OrderStore is Ownable {
     return (orders[orderId], statusHistory[orderId]);
   }
 
-  function submitTransaction(bytes32 data)
+  function submitTransaction(string calldata id, bytes32 data)
         public
         returns (uint transactionId)
   {
-    require(roles[msg.sender] == NVKD_ROLE || roles[msg.sender] == SHOP_ROLE || roles[msg.sender] == NCC_ROLE, "Not permission");
-    addTransaction(data);
+    require(roles[msg.sender] == QL_ROLE || roles[msg.sender] == SHOP_ROLE || roles[msg.sender] == NCC_ROLE, "Not permission");
+    addTransaction(id, data);
     signatures[data][msg.sender] = true;
     emit Sign(data, msg.sender);
-    confirmTransaction(data);
+    confirmTransaction(id,data);
   }
 
-  function addTransaction(bytes32 data)
+  function addTransaction(string calldata id, bytes32 data)
         public
     {
-        if(consensusTx[data].timestamp != 0) {
+        if(consensusTx[id][data].timestamp != 0) {
           return;
         } else {
-          consensusTx[data] = Consensus({
+          consensusTx[id][data] = Consensus({
             verified: false,
             timestamp: block.timestamp
           });
         }
     }
 
-  function confirmTransaction(bytes32 data)
+  function confirmTransaction(string calldata id, bytes32 data)
         public
     {
         uint256 count = 0;
@@ -170,8 +172,8 @@ contract OrderStore is Ownable {
             count++;
           }
         }
-        if(count == signers.length) {
-          consensusTx[data].verified = true;
+        if(count == requires) {
+          consensusTx[id][data].verified = true;
           emit Verify(data);
         }
     }
