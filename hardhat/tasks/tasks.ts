@@ -31,7 +31,7 @@ task('contract:createOrder', 'verify contract')
   const hash = sha256(data.name);
   console.log(hash.toString());
 
-  const tx = await instance.methods.issue(data.id, `0x${hash.toString()}`).send({ from: deployer});
+  const tx = await instance.methods.createOrder(data.id, `0x${hash.toString()}`).send({ from: deployer});
 
   console.log(`tx hash: ${tx.transactionHash}`);
   });

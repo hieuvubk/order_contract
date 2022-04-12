@@ -54,6 +54,7 @@ contract OrderStore is Ownable {
   }
 
   struct Consensus {
+    bytes32 data;
     bool verified;
     uint256 timestamp;
   }
@@ -74,7 +75,7 @@ contract OrderStore is Ownable {
   mapping(bytes32 => mapping(address => bool)) public signatures;
 
   /// A mapping of consensus hash to signed
-  mapping(string => mapping(bytes32 => Consensus)) public consensusTx;
+  mapping(string => Consensus) public consensusTx;
 
   address[] public signers;
 
@@ -106,7 +107,7 @@ contract OrderStore is Ownable {
     rules[NVGH_ROLE].push(OrderStatus.deposited);
   }
 
-  function issue(string memory orderId, bytes32 orderHash) public onlyOwner {
+  function createOrder(string memory orderId, bytes32 orderHash) public onlyOwner {
     require(statusHistory[orderId].length == 0, "Order exist");
 
     statusHistory[orderId].push(StatusHistory({
@@ -154,12 +155,13 @@ contract OrderStore is Ownable {
   function addTransaction(string calldata id, bytes32 data)
         public
     {
-        if(consensusTx[id][data].timestamp != 0) {
+        if(consensusTx[id].timestamp != 0) {
           return;
         } else {
-          consensusTx[id][data] = Consensus({
+          consensusTx[id] = Consensus({
             verified: false,
-            timestamp: block.timestamp
+            timestamp: block.timestamp,
+            data: data
           });
         }
     }
@@ -174,7 +176,7 @@ contract OrderStore is Ownable {
           }
         }
         if(count == requires) {
-          consensusTx[id][data].verified = true;
+          consensusTx[id].verified = true;
           emit Verify(id, data);
         }
     }
@@ -185,6 +187,15 @@ contract OrderStore is Ownable {
 
   function setRole(address user, bytes32 role) public {
     roles[user] = role;
+  }
+
+  function getConsensus(string calldata id) public returns (Consensus memory) {
+    return consensusTx[id];
+  }
+
+  function checkSigned(string calldata id, address signer) public returns (bool) {
+    bytes32 data = consensusTx[id].data;
+    return signatures[data][signer];
   }
 
 }
