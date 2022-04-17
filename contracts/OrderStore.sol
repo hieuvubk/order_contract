@@ -107,9 +107,20 @@ contract OrderStore is Ownable {
     rules[NVGH_ROLE].push(OrderStatus.deposited);
   }
 
-  function createOrder(string memory orderId, bytes32 orderHash) public onlyOwner {
+  function createOrder(string memory orderId, bytes32 orderHash) public {
     require(statusHistory[orderId].length == 0, "Order exist");
 
+    bytes32 role = roles[msg.sender];
+    OrderStatus[] memory remainStatus = rules[role];
+    bool isExist = false;
+    for(uint256 i=0; i < remainStatus.length; i++) {
+      if(remainStatus[i] == OrderStatus.accepted) {
+        isExist = true;
+        break;
+      }
+    }
+    require(isExist, "No permission");
+    
     statusHistory[orderId].push(StatusHistory({
       status: OrderStatus.accepted,
       atBlock: block.number
@@ -118,7 +129,7 @@ contract OrderStore is Ownable {
     emit OrderUpload(orderId, orderHash, msg.sender);
   }
 
-  function updateOrderStatus(string memory orderId, OrderStatus status) public onlyOwner {
+  function updateOrderStatus(string memory orderId, OrderStatus status) public {
     require(statusHistory[orderId].length != 0, "Order not exist");
     bytes32 role = roles[msg.sender];
     OrderStatus[] memory remainStatus = rules[role];

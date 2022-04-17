@@ -7,7 +7,7 @@ task('contract:verify', 'verify contract')
   .addOptionalParam('address', 'address')
   .addOptionalParam('symbol', 'symbol')
   .setAction(async (taskArgs, hre) => {
-    const address = taskArgs.address || '0x428C95C3Eaa171FA966068143DD07140B3d255f8';
+    const address = taskArgs.address || '0x9c21902638aC29f1CfcFD329008C80200b70Bd7E';
     await hre.run('verify:verify', {
       address,
       constructorArguments: [],
@@ -69,10 +69,12 @@ task('contract:updateStatus', 'Update order status')
     wait_deposit, 
     deposited 
   };
+  console.log(OrderStatus.call_ship);
 
-  const tx = await instance.methods.updateOrderStatus(data.id, OrderStatus.return_shop).send({ from: deployer});
+  // const tx = await instance.methods.updateOrderStatus(data.id, OrderStatus.return_shop).send({ from: deployer});
 
-  console.log(`tx hash: ${tx.transactionHash}`);
+  // console.log(`tx hash: ${tx.transactionHash}`);
+
   });
 
   task('contract:getOrder', 'Update order status')
